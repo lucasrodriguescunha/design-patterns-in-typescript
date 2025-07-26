@@ -2,18 +2,7 @@
 
 Uma coleção completa de exemplos práticos de **Padrões de Projeto (Design Patterns)** implementados em TypeScript, demonstrando as melhores práticas para resolver problemas comuns de desenvolvimento de software.
 
-## 📋 Índice
-
-- [Sobre o Projeto](#sobre-o-projeto)
-- [Tecnologias Utilizadas](#tecnologias-utilizadas)
-- [Como Executar](#como-executar)
-- [Padrões Implementados](#padrões-implementados)
-  - [Padrões Criacionais](#padrões-criacionais)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Contribuindo](#contribuindo)
-- [Licença](#licença)
-
-## 🚀 Sobre o projeto
+## Sobre o projeto
 
 Este repositório contém implementações práticas dos principais padrões de projeto (Design Patterns) descritos no livro "Design Patterns: Elements of Reusable Object-Oriented Software" (Gang of Four), adaptados para TypeScript com exemplos claros e bem documentados.
 
