@@ -1,4 +1,4 @@
-# Design Patterns em TypeScript 🎯
+# Design Patterns em TypeScript 
 
 Uma coleção completa de exemplos práticos de **Padrões de Projeto (Design Patterns)** implementados em TypeScript, demonstrando as melhores práticas para resolver problemas comuns de desenvolvimento de software.
 
