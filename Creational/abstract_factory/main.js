@@ -1,75 +1,75 @@
-var LightButton = /** @class */ (function () {
-    function LightButton() {
+// Implementação concreta de um canal TCP
+var TCPChannel = /** @class */ (function () {
+    function TCPChannel() {
     }
-    LightButton.prototype.render = function () {
-        console.log('☀️ Renderizando botão CLARO');
+    TCPChannel.prototype.connect = function () {
+        console.log("Conectando via TCP...");
     };
-    return LightButton;
+    TCPChannel.prototype.send = function (data) {
+        console.log("Enviando via TCP: ".concat(data));
+    };
+    TCPChannel.prototype.disconnect = function () {
+        console.log("Desconectando TCP...");
+    };
+    return TCPChannel;
 }());
-var LightCheckbox = /** @class */ (function () {
-    function LightCheckbox() {
+// Implementação concreta de um canal UDP
+var UDPChannel = /** @class */ (function () {
+    function UDPChannel() {
     }
-    LightCheckbox.prototype.render = function () {
-        console.log('☀️ Renderizando checkbox CLARO');
+    UDPChannel.prototype.connect = function () {
+        console.log("Conectando via UDP...");
     };
-    return LightCheckbox;
+    UDPChannel.prototype.send = function (data) {
+        console.log("Enviando via UDP: ".concat(data));
+    };
+    UDPChannel.prototype.disconnect = function () {
+        console.log("Desconectando UDP...");
+    };
+    return UDPChannel;
 }());
-var DarkButton = /** @class */ (function () {
-    function DarkButton() {
+// Implementação concreta de um canal IP
+var IPChannel = /** @class */ (function () {
+    function IPChannel() {
     }
-    DarkButton.prototype.render = function () {
-        console.log('🌙 Renderizando botão ESCURO');
+    IPChannel.prototype.connect = function () {
+        console.log("Conectando via IP...");
     };
-    return DarkButton;
+    IPChannel.prototype.send = function (data) {
+        console.log("Enviando via IP: ".concat(data));
+    };
+    IPChannel.prototype.disconnect = function () {
+        console.log("Desconectando IP...");
+    };
+    return IPChannel;
 }());
-var DarkCheckbox = /** @class */ (function () {
-    function DarkCheckbox() {
+// Fábrica estática - decide o tipo de canal a ser criado
+var ChannelFactory = /** @class */ (function () {
+    function ChannelFactory() {
     }
-    DarkCheckbox.prototype.render = function () {
-        console.log('🌙 Renderizando checkbox ESCURO');
+    ChannelFactory.create = function (type) {
+        if (type === "TCP") {
+            return new TCPChannel();
+        }
+        else if (type === "UDP") {
+            return new UDPChannel();
+        }
+        else {
+            return new IPChannel();
+        }
     };
-    return DarkCheckbox;
+    return ChannelFactory;
 }());
-var LightUIFactory = /** @class */ (function () {
-    function LightUIFactory() {
-    }
-    LightUIFactory.prototype.createButton = function () {
-        return new LightButton();
-    };
-    LightUIFactory.prototype.createCheckbox = function () {
-        return new LightCheckbox();
-    };
-    return LightUIFactory;
-}());
-var DarkUIFactory = /** @class */ (function () {
-    function DarkUIFactory() {
-    }
-    DarkUIFactory.prototype.createButton = function () {
-        return new DarkButton();
-    };
-    DarkUIFactory.prototype.createCheckbox = function () {
-        return new DarkCheckbox();
-    };
-    return DarkUIFactory;
-}());
-var Application = /** @class */ (function () {
-    function Application(factory) {
-        this.button = factory.createButton();
-        this.checkbox = factory.createCheckbox();
-    }
-    Application.prototype.renderUI = function () {
-        this.button.render();
-        this.checkbox.render();
-    };
-    return Application;
-}());
-var userTheme = 'dark';
-var factory;
-if (userTheme === 'light') {
-    factory = new DarkUIFactory();
+// Código cliente - não sabe qual canal está sendo usado
+function sendMessage(message, protocol) {
+    var channel = ChannelFactory.create(protocol);
+    channel.connect();
+    channel.send(message);
+    channel.disconnect();
 }
-else {
-    factory = new LightUIFactory();
-}
-var app = new Application(factory);
-app.renderUI();
+// Testando com protocolos diferentes
+sendMessage("Olá servidor!", "TCP");
+sendMessage("Olá servidor!", "IP");
+console.log("-------------------------");
+sendMessage("Ping!", "UDP");
+sendMessage("Ping!", "IP");
